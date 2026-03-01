@@ -1450,12 +1450,8 @@ func (p *wireProtocol) paramsToBlr(transHandle int32, params []driver.Value, pro
 			v = []byte{}
 			blr = []byte{14, 0, 0}
 		case []byte:
-			if len(f) < MAX_CHAR_LENGTH {
-				blr, v = _bytesToBlr(f)
-			} else {
-				v, _ = p.createBlob(f, transHandle)
-				blr = []byte{9, 0}
-			}
+			v, _ = p.createBlob(f, transHandle)
+			blr = []byte{9, 0}
 		default:
 			// can't convert directory
 			b := str_to_bytes(fmt.Sprintf("%v", f))
